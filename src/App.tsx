@@ -1,13 +1,15 @@
 import { useState } from "react";
 import BarcodeBestScanner from "./BarcodeBestScanner";
 import BarcodeScanner from "./BarcodeScanner";
+import "./App.css"
 
 function App() {
   const [showBest, setShowBest] = useState(false);
+
   return (
-    <div style={{ padding: 10 }}>
+    <div className="app">
       <button onClick={() => setShowBest(!showBest)}>
-        {showBest ? "Default" : "Best"}
+        {showBest ? "Best" : "Default"}
       </button>
       {(showBest) ? (
         <BarcodeBestScanner />

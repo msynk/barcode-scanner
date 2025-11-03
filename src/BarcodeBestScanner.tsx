@@ -130,7 +130,7 @@ export default function BarcodeScanner() {
                     </select>
                 </div>
 
-                <video ref={videoRef} autoPlay playsInline style={{ width: "100%", maxWidth: 520, border: "2px solid #888", borderRadius: 8 }} />
+                <video ref={videoRef} autoPlay playsInline style={{ width: "100%", maxWidth: 520, outline: "2px solid #888" }} />
                 <canvas ref={canvasRef} style={{ display: "none" }} />
 
                 <div>
