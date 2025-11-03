@@ -2,11 +2,12 @@
 import { useEffect, useRef, useState } from "react";
 
 declare global {
-    interface Window { ZXing: any; zxing: any; }
+    interface Window { ZXing: any; zing: any; }
 }
 
 const ZOOM = 0.2;
 const HEIGHT_RATIO = 0.3;
+const ZING_SCRIPT = "zxing_reader.js";
 const canvas = document.createElement("canvas");
 
 export default function BarcodeScanner() {
@@ -17,11 +18,11 @@ export default function BarcodeScanner() {
     useEffect(() => {
         if (!window.ZXing) {
             const script = document.createElement("script");
-            script.src = "zxing_reader.js";
+            script.src = ZING_SCRIPT;
             script.onload = () => {
-                window.ZXing().then((ins: any) => {
-                    window.zxing = ins;
-                    // alert(ins);
+                window.ZXing().then((res: any) => {
+                    window.zing = res;
+                    // alert(res);
                 });
             };
             document.body.appendChild(script);
@@ -69,9 +70,7 @@ export default function BarcodeScanner() {
     };
 
     async function scan() {
-        if (
-            window.ZXing && videoRef.current
-        ) {
+        if (window.ZXing && videoRef.current) {
             const video = videoRef.current;
 
             canvas.width = video.videoWidth;
@@ -86,12 +85,12 @@ export default function BarcodeScanner() {
             try {
                 if (imageData) {
                     const sourceBuffer = imageData.data;
-                    const zxing = window.zxing;
-                    if (zxing != null) {
-                        const buffer = zxing._malloc(sourceBuffer.byteLength);
-                        zxing.HEAPU8.set(sourceBuffer, buffer);
-                        const res = zxing.readBarcodeFromPixmap(buffer, imgWidth, imgHeight * HEIGHT_RATIO, true, "");
-                        zxing._free(buffer);
+                    const zing = window.zing;
+                    if (zing != null) {
+                        const buffer = zing._malloc(sourceBuffer.byteLength);
+                        zing.HEAPU8.set(sourceBuffer, buffer);
+                        const res = zing.readBarcodeFromPixmap(buffer, imgWidth, imgHeight * HEIGHT_RATIO, true, "");
+                        zing._free(buffer);
 
                         if (res && res.text) {
                             setResults(old => {
