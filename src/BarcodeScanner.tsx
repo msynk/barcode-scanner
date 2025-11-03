@@ -17,7 +17,7 @@ export default function BarcodeScanner() {
     useEffect(() => {
         if (!window.ZXing) {
             const script = document.createElement("script");
-            script.src = "/zxing_reader.js";
+            script.src = "zxing_reader.js";
             script.onload = () => {
                 window.ZXing().then((ins: any) => {
                     window.zxing = ins;
